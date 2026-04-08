@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # 1. База данных
+  db:
+    image: mariadb:latest
+    container_name: nginx-docker-db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${ROOT}
+      - MYSQL_DATABASE=${DB}
+      - MYSQL_USER=${USER}
+      - MYSQL_PASSWORD=${PASSWORD_USER}
+    volumes:
+      - ./db_data:/var/lib/mysql
+
+  # 2. Обработчик PHP
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+    container_name: nginx-docker-php-
+    restart: always
+    volumes:
+      - ./html/www/landing:/var/www/html/landing
+      - ./html/www/social:/var/www/html/social
+
+  # 3. Веб-сервер Nginx
+  web:
+    build: .
+    container_name: nginx-docker-web-
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./html/www/landing:/var/www/html/landing
+      - ./html/www/social:/var/www/html/social
+      - ./conf/landing.conf:/etc/nginx/conf.d/landing.conf
+    depends_on:
+      - php
+      - db
+
+  #Telegram-прокси
+  tg-proxy:
+    image: telegrammessenger/proxy:latest
+    container_name: mtp-proxy
+    restart: always
+    ports:
+      - "8443:443"
+    environment:
+      - SECRET=${TG_PROXY_SECRET}
