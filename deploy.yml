@@ -3,7 +3,7 @@ name: Nginx docker deploy
 on:
   push:
     branches:
-      - master  # Сработает при пуше в ветку main
+      - master
 
 jobs:
   deploy:
