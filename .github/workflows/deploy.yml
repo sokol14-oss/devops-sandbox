@@ -19,6 +19,8 @@ jobs:
           script: |
             cd /home/asokolova/nginx-docker
             git pull origin main
+            export DOCKER_API_VERSION=1.41
+            export COMPOSE_API_VERSION=1.41
             docker compose up -d --build
             # Если нужно перезапустить докер при обновлении:
             # /usr/local/bin/docker-compose up -d --build reporter
