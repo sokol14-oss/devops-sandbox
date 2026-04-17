@@ -25,6 +25,8 @@ if (isset($_SESSION['user_id'])) {
         </p>
         <button type="submit">Отправить заявку</button>
     </form>
+    <?php include 'footer.php'; ?>
+
 </body>
 
 </html>
