@@ -51,6 +51,7 @@ services:
       - "8443:443"
     environment:
       - SECRET=${TG_PROXY_SECRET}
+      - IP=80.74.25.3
       - WORKERS=4
       - EXTRA_FLAGS=--ipv4-only
   netdata:
