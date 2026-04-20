@@ -18,7 +18,7 @@ jobs:
           port: 49152
           script: |
             cd /home/asokolova/nginx-docker
-            git pull origin main
+            git pull origin master
             export DOCKER_API_VERSION=1.41
             export COMPOSE_API_VERSION=1.41
             docker compose up -d --build
