@@ -18,6 +18,8 @@ jobs:
           port: 49152
           script: |
             cd /home/asokolova/nginx-docker
+            git fetch --all
+            git reset --hard origin/master
             git pull origin master
             export DOCKER_API_VERSION=1.41
             export COMPOSE_API_VERSION=1.41
