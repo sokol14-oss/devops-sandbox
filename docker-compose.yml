@@ -45,7 +45,7 @@ services:
       - ./conf/landing.conf:/etc/nginx/conf.d/landing.conf
       - ./.htpasswd:/etc/nginx/.htpasswd
       - ./certbot/www:/var/www/certbot
-      #- /dev/null:/etc/nginx/conf.d/default.conf
+      - ./certbot/conf:/etc/letsencrypt
     depends_on:
       - php
       - db
