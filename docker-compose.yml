@@ -9,7 +9,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=${ROOT}
       - MYSQL_DATABASE=${DB}
-      - MYSQL_USER=${USER}
+      - MYSQL_USER=${DB_USER}
       - MYSQL_PASSWORD=${PASSWORD_USER}
     volumes:
       - ./db_data:/var/lib/mysql
@@ -21,6 +21,12 @@ services:
       dockerfile: Dockerfile.php
     container_name: nginx-docker-php-
     restart: always
+    environment:
+      - ROOT=${ROOT}
+      - HOST="db"
+      - DB_NAME=${DB}
+      - DB_USER=${DB_USER}
+      - PASSWORD_USER=${PASSWORD_USER}
     volumes:
       - ./html/www/landing:/var/www/html/landing
       - ./html/www/social:/var/www/html/social
